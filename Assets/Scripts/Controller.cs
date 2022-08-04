@@ -13,9 +13,12 @@ public class Controller : MonoBehaviour
 
     bool cursorLocked = true;
 
+    private Camera cam;
+
     void Awake()
     {
         camMoveSpeed = MenuSystemsScript.camMoveSpeed;
+        cam = Camera.main;
     }
 
 
@@ -24,9 +27,16 @@ public class Controller : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
+    void FixedUpdate()
+    {
+        // CamBasicStuff();
+    }
+
     void Update()
     {
         CamBasicStuff();
+
+        // badCulling();
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -52,6 +62,8 @@ public class Controller : MonoBehaviour
         xMouse += Input.GetAxisRaw("Mouse X") * camRotSpeed;
         yMouse += Input.GetAxisRaw("Mouse Y") * camRotSpeed;
 
+        yMouse = Mathf.Clamp(yMouse, -90, 90);
+
         if (Input.GetKey(KeyCode.E))
         {
             yMove = 1f;
@@ -65,9 +77,9 @@ public class Controller : MonoBehaviour
             yMove = 0f;
         }
 
-        Vector3 MoveVect = (transform.forward * zMove + Vector3.up * yMove + transform.right * xMove) * (camMoveSpeed / 10f);
+        Vector3 MoveVect = (transform.forward * zMove + Vector3.up * yMove + transform.right * xMove).normalized * (camMoveSpeed / 10f) * Time.fixedDeltaTime;
 
-        Quaternion RotVect = Quaternion.Euler(-yMouse, xMouse, 0f);
+        Quaternion RotVect = Quaternion.Euler(-yMouse, xMouse, 0f).normalized;
 
         // transform.Translate(MoveVect, Space.Self);
         if (MoveVect.magnitude != 0 || yMove != 0)
@@ -75,5 +87,14 @@ public class Controller : MonoBehaviour
             transform.localPosition += MoveVect;
         }
         transform.localRotation = RotVect;
+    }
+
+    void badCulling()
+    {
+        foreach(GameObject i in GameObject.FindGameObjectsWithTag("blockTag"))
+        {
+            Vector3 screenPoint = cam.WorldToViewportPoint(i.transform.position);
+            bool onScreen = screenPoint.z > 0 && screenPoint.x > 0 && screenPoint.x < 1 && screenPoint.y > 0 && screenPoint.y < 1;
+        }
     }
 }

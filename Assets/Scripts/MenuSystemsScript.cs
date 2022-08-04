@@ -13,8 +13,9 @@ public class MenuSystemsScript : MonoBehaviour
     [SerializeField] TMP_InputField mapsizeTextfield;
     [SerializeField] TMP_InputField MovespeedInput;
 
-    void Awake() {
-        MovespeedInput.text = "1";
+    void Awake()
+    {
+        MovespeedInput.text = "4";
     }
 
 
