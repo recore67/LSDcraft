@@ -7,14 +7,14 @@ public class BlockScript : MonoBehaviour
     private Renderer mesh;
     private Camera cam;
 
-    private GameObject gfxObj;
+    private MeshCollider meshCollider;
 
     // Start is called before the first frame update
     void Awake()
     {
-        mesh = GetComponentInChildren<Renderer>();
+        mesh = GetComponent<Renderer>();
+        meshCollider = GetComponent<MeshCollider>();
         cam = Camera.main;
-        gfxObj = transform.Find("GFX").gameObject;
     }
 
     void Start()
@@ -37,6 +37,14 @@ public class BlockScript : MonoBehaviour
         else
         {
             // mesh.forceRenderingOff = false;
+        }
+    }
+
+    void OnTriggerEnter(Collider collider)
+    {
+        if (collider.gameObject.tag == "blockTag")
+        {
+            Destroy(gameObject);
         }
     }
 

@@ -515,7 +515,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mapobj: {fileID: 1299599258}
-  dirtobj: {fileID: 3964196669478924325, guid: c9539d7bf6fe9474a99928d7e166b333, type: 3}
+  dirtobj: {fileID: 3258689111330930240, guid: c9539d7bf6fe9474a99928d7e166b333, type: 3}
   fpsText: {fileID: 917968797}
 --- !u!1 &1259368534
 GameObject:
