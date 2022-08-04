@@ -12,7 +12,7 @@ public class WorldGenerater : MonoBehaviour
 
     bool NextBlock = false;
 
-    float[] verticals = { 0f, 1f };
+    float[] verticals = { 0f, 1f, 2f, 3f };
     float[] verticalChange;
 
     private int MapSize;
@@ -64,15 +64,15 @@ public class WorldGenerater : MonoBehaviour
 
         // if (MapSize > 0)
         // {
-        //     float[] verticals = new float[] { 0f, 1f };
+        //     float[] verticals = { 0f, 1f };
         // }
         // else if (MapSize > 1)
         // {
-        //     float[] verticals = new float[] { 0f, 1f, 2f };
+        //     float[] verticals = { 0f, 1f, 2f };
         // }
         // else if (MapSize > 2)
         // {
-        //     float[] verticals = new float[] { 0f, 1f, 2f, 3f };
+        //     float[] verticals = { 0f, 1f, 2f, 3f };
         // }
 
         for (int i = 0; i <= MapSize; i++)
@@ -94,17 +94,6 @@ public class WorldGenerater : MonoBehaviour
                     Vector3 dirtSpawnpos = new Vector3(x, verticals[Random.Range(0, verticals.Length)], z);
                     GameObject spawnedDirt = GameObject.Instantiate(dirtobj, dirtSpawnpos, Quaternion.identity);
                     spawnedDirt.transform.parent = _mapobj.transform;
-
-                    if (i > (MapSize / 2))
-                    {
-                        Vector3 dirtSpawnpos2 = new Vector3(Random.Range(-sqrMapSize, sqrMapSize), verticals[verticals.Length - 1] + 1f, Random.Range(-sqrMapSize, sqrMapSize));
-                        GameObject spawnedDirt2 = GameObject.Instantiate(dirtobj, dirtSpawnpos2, Quaternion.identity);
-                        spawnedDirt2.transform.parent = _mapobj.transform;
-                    }
-                    else
-                    {
-                        break;
-                    }
                 }
             }
         }

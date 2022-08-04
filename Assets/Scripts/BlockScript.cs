@@ -42,10 +42,10 @@ public class BlockScript : MonoBehaviour
 
     void OnTriggerEnter(Collider collider)
     {
-        if (collider.gameObject.tag == "blockTag")
-        {
-            Destroy(gameObject);
-        }
+        // if (collider.gameObject.tag == "blockTag")
+        // {
+        //     Destroy(gameObject);
+        // }
     }
 
     // private void OnBecameInvisible()
